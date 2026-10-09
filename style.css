@@ -84,11 +84,14 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .newsletter > p:not(.form-message) { margin: 13px 0 28px; color: var(--muted); font-size: 11px; }
 .newsletter-form { display: flex; max-width: 440px; margin: auto; border-bottom: 1px solid #aaa69d; }
 .newsletter-form:focus-within { border-color: var(--accent); }
+.newsletter-form.has-error { border-color: #b85639; }
 .newsletter-form input { flex: 1; width: 0; border: 0; outline: 0; padding: 14px 2px; background: transparent; font-size: 11px; }
 .newsletter-form input::placeholder { color: #969188; }
+.newsletter-form input[aria-invalid="true"] { color: #b85639; }
 .newsletter-form button { border: 0; background: transparent; padding: 0 3px 0 15px; font-size: 10px; cursor: pointer; }
 .newsletter-form button:hover { color: var(--accent); }
 .form-message { min-height: 16px; margin: 10px 0 0; color: var(--accent); font-size: 10px; }
+.newsletter-form.has-error + .form-message { color: #b85639; }
 .site-footer { padding: 40px 7% 18px; background: var(--paper); text-align: center; }
 .footer-wordmark { font-size: 25px; }
 .site-footer > p { margin: 8px 0 33px; color: var(--muted); font: 13px var(--serif); }

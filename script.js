@@ -48,15 +48,34 @@ document.querySelectorAll(".category-pill").forEach((pill) => {
   });
 });
 
-document.querySelector(".newsletter-form").addEventListener("submit", (event) => {
+const newsletterForm = document.querySelector(".newsletter-form");
+const emailInput = newsletterForm.querySelector('input[type="email"]');
+const formMessage = document.querySelector(".form-message");
+
+newsletterForm.noValidate = true;
+
+newsletterForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const form = event.currentTarget;
-  const emailInput = form.querySelector('input[type="email"]');
-  const message = document.querySelector(".form-message");
-  if (!emailInput.validity.valid) {
-    emailInput.reportValidity();
+  const isValid = emailInput.value.trim() !== "" && emailInput.validity.valid;
+
+  if (!isValid) {
+    newsletterForm.classList.add("has-error");
+    emailInput.setAttribute("aria-invalid", "true");
+    formMessage.textContent = "Please enter a valid email address.";
+    emailInput.focus();
     return;
   }
-  message.textContent = "Thank you for joining us. Keep an eye on your inbox.";
-  form.reset();
+
+  newsletterForm.classList.remove("has-error");
+  emailInput.removeAttribute("aria-invalid");
+  formMessage.textContent = "Thank you for joining us. Keep an eye on your inbox.";
+  newsletterForm.reset();
+});
+
+emailInput.addEventListener("input", () => {
+  if (emailInput.validity.valid) {
+    newsletterForm.classList.remove("has-error");
+    emailInput.removeAttribute("aria-invalid");
+    formMessage.textContent = "";
+  }
 });
